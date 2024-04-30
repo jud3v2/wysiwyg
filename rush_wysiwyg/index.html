@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Éditeur WYSIWYG</title>
+    <link rel="stylesheet" href="styles/wysiwyg.css">
+  </head>
+  <body>
+    <div class="editor-container">
+      <div class="textarea-container">
+        <h1>Éditeur WYSIWYG</h1>
+        <button id="darkThemeButton" class="darkThemeButton">Basculer vers le thème sombre</button>
+        <textarea id="myTextarea"></textarea>
+        <div class="bottom-buttons-container">
+          <button class="bottom-button" onclick="myWysiwyg.saveContent()">
+            Sauvegarder
+          </button>
+          <input
+            class="bottom-button"
+            type="file"
+            onchange="myWysiwyg.loadContent(this.files[0])"
+          />
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="wysiwyg-container">
+        <h1>Résultat WYSIWYG</h1>
+        <div id="wysiwyg"></div>
+      </div>
+    </div>
+
+    <script type="module">
+      import { MyWysiwyg } from "./modules/my_wysiwyg.js";
+
+      const myWysiwyg = new MyWysiwyg(document.querySelector("#myTextarea"), {
+        buttons: [
+          "bold",
+          "italic",
+          "strike",
+          "color",
+          "fontSize",
+          "link",
+          "increaseIndent",
+          "decreaseIndent",
+          "alignLeft",
+          "alignRight",
+          "alignCenter",
+          "alignJustify",
+          "toggleSource",
+        ],
+        autoSave: true,
+        saveInterval: 30000, // 30 seconds
+      });
+
+      window.myWysiwyg = myWysiwyg;
+    </script>
+    <script src="scripts/dark_theme.js"></script>
+  </body>
+</html>
